@@ -1,0 +1,152 @@
+
+
+/* Main Container */
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid Layout */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Column Styling */
+.col {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* About Section */
+.about-section {
+    background: #f9f9f9;
+    padding: 20px;
+    border-left: 5px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.about-section h2 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: 18px;
+    color: #555;
+}
+
+.about-section ul {
+    list-style-type: none;
+}
+
+.about-section ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.about-section ul li strong {
+    font-weight: bold;
+}
+
+/* Call to Action Section */
+.call-to-action {
+    text-align: center;
+    background: #e3f2fd;
+    border-left: 5px solid #0056b3;
+}
+
+.call-to-action .cta-button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #2e8147;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.call-to-action .cta-button:hover {
+    background-color: #257a2d;
+}
+
+/* Form Styling */
+.form-container {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-container h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2e8147;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #2f9d34;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .form-container {
+        max-width: 100%;
+    }
+
+    .about-section h2 {
+        font-size: 20px;
+    }
+
+    .about-section p,
+    .about-section ul li,
+    .call-to-action p {
+        font-size: 16px;
+    }
+}

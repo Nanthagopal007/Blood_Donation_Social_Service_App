@@ -1,0 +1,70 @@
+
+/* About Container */
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* About Sections */
+.about-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-left: 5px solid #428f46;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.about-section h2 {
+    font-size: 24px;
+    color: #428f46;
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Testimonial Section */
+.testimonial-section {
+    background: #e3f2fd;
+    padding: 20px;
+    border-left: 5px solid #428f46;
+}
+
+.testimonial-section blockquote {
+    font-style: italic;
+    font-size: 18px;
+    color: #444;
+    border-left: 5px solid #428f46;
+    padding-left: 15px;
+}
+
+.testimonial-section strong {
+    color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-container {
+        padding: 15px;
+    }
+
+    .about-section {
+        padding: 15px;
+    }
+
+    .about-section h2 {
+        font-size: 20px;
+    }
+
+    .about-section p,
+    .testimonial-section blockquote {
+        font-size: 16px;
+    }
+}

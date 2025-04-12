@@ -1,0 +1,81 @@
+/* ContactDetails.css */
+.contact-container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #4CAF50;
+}
+
+.contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.contact-card {
+    background: #f9f9f9;
+    padding: 15px;
+    width: 250px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+}
+
+.contact-card:hover {
+    background: #e0f7fa;
+}
+
+.selected {
+    background: #c8e6c9;
+    border: 2px solid #4CAF50;
+}
+
+.contact-info-card {
+    background: #fff8e1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #fbc02d;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-danger {
+    background: red;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: darkred;
+}

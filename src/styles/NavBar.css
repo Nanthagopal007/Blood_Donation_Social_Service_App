@@ -1,0 +1,52 @@
+/* Make brand image neat */
+.Brand {
+  height: 50px;
+  width: auto;
+  border-radius: 8px;
+}
+
+/* Logout button styling */
+.logout {
+  background-color:#1a8e5a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.logout:hover {
+  background-color: #81c588;
+  color: #0a3622;
+}
+
+/* Optional: increase spacing on right links */
+.navbar-nav .nav-item {
+  margin-left: 15px;
+ font-size: 18px;
+  font-weight: 600;
+}
+
+/* Active grey background */
+.active-grey {
+  background-color: #81c588 !important; /* Bootstrap grey */
+  border-radius: 6px;
+  padding: 4px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #81c588; /* slightly darker grey */
+  border-radius: 5px;
+}
+.sup{
+  color: white;
+  background-color: red;
+  border-radius: 20%;
+  padding: 2px 4px; 
+  font-size: 16px;
+  font-weight: 600;
+}

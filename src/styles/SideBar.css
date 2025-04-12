@@ -1,0 +1,91 @@
+/* Sidebar Container */
+.sidebar {
+    position: fixed;
+    left: -250px; /* Initially hidden */
+    top: 0;
+    width: 250px;
+    height: 100vh; /* Full height */
+    background-color: #198754; /* Bootstrap success green */
+    color: white;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding-top: 60px;
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* When sidebar is open */
+.sidebar.open {
+    left: 0;
+}
+
+/* Sidebar Links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.sidebar ul li a, .logoutbtn {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.active{
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+.sidebar ul li a:hover, .logoutbtn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+/* Logout button */
+.logoutbtn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    display: none;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #198754;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: block; /* Show toggle button on small screens */
+    }
+
+    .sidebar {
+        left: -250px; /* Hidden by default */
+        width: 250px;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+}

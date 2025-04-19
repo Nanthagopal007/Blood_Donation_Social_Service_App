@@ -41,11 +41,11 @@ const SideBar = () => {
                             <i className="bi bi-ticket-detailed p-2"></i>Donors
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to="/contactus" className={({ isActive }) => isActive ? "active" : ""}>
                             <i className="bi bi-telephone p-2"></i>Contact Us
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         <button onClick={handleLogout} className="logoutbtn">
                             <i className="bi bi-box-arrow-left p-2"></i>LogOut

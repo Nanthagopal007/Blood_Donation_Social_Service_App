@@ -56,9 +56,9 @@ const DonorList = () => {
                     </a>
 
                     {isInCart ? (
-                      <button className="btnclear" onClick={() => removeCart(donor._id)}>Clear -</button>
+                      <button className="btnremove" onClick={() => removeCart(donor._id)}>Remove -</button>
                     ) : (
-                      <button className="btnadd" onClick={() => addCart(donor)}>Add +</button>
+                      <button className="btnsave" onClick={() => addCart(donor)}>Save +</button>
                     )}
                   </div>
                 </div>

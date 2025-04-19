@@ -36,7 +36,7 @@ const Register = () => {
   };
 
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid bg-success min-vh-100 '>
       <div className='row justify-content-center'>
         <div className='col-12 col-sm-8 col-md-6 col-lg-4 mt-5 pt-5'>
           <form className="form" onSubmit={handleSubmit}>

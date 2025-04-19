@@ -13,7 +13,7 @@ const DashBoard = () => {
 
         {/* Admin panel content - Takes full width on small screens, 8 columns on medium+ screens */}
         <div className="content">
-          <h2 className="text-center ">Number of :</h2>
+          <h2 className="text-center text-success">Number of :</h2>
           <StatsCard />
         </div>
       </div>

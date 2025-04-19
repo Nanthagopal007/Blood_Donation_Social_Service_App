@@ -19,7 +19,7 @@
 }
 
 .logout:hover {
-  background-color: #81c588;
+  background-color: #467b4b;
   color: #0a3622;
 }
 
@@ -32,14 +32,14 @@
 
 /* Active grey background */
 .active-grey {
-  background-color: #81c588 !important; /* Bootstrap grey */
+  background-color: #467b4b !important; /* Bootstrap grey */
   border-radius: 6px;
   padding: 4px 12px;
   transition: background-color 0.3s ease;
 }
 
 .nav-link:hover {
-  background-color: #81c588; /* slightly darker grey */
+  background-color: #467b4b; /* slightly darker grey */
   border-radius: 5px;
 }
 .sup{

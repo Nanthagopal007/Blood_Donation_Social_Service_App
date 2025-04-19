@@ -5,12 +5,12 @@ const UserDetails = () => {
   const { users, handleDelete } = useCart(); // Get donors & cart from context
 
   return (
-    <div className="container">
-
+    <div>
       {users.length === 0 ? (
         <p className="no-users">No users found.</p>
       ) : (
         <div className="card-container">
+
           {users.map((user) => (
             <div key={user._id} className="user-card">
               <h3>{user.name}</h3>
@@ -18,7 +18,7 @@ const UserDetails = () => {
               <p>{user.email}</p>
               <p>Role: {user.role}</p>
               <button className="delete-btn " onClick={() => handleDelete(user._id)}>
-              <i className="bi bi-trash me-1 "></i>Delete
+                <i className="bi bi-trash me-1 "></i>
               </button>
             </div>
           ))}

@@ -59,14 +59,14 @@ const NavBar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink
+                {/* <NavLink
                   className={({ isActive }) =>
                     isActive ? "nav-link text-white active-grey" : "nav-link text-white"
                   }
                   to="/contact"
                 >
                   CONTACT
-                </NavLink>
+                </NavLink> */}
               </li>
               <li className="nav-item">
                 <NavLink

@@ -13,7 +13,7 @@ const Users = () => {
 
       {/* Content Section */}
       <div className="content">
-        <h2>Users Lists</h2>
+        <h2 className="text-center text-success">Users Lists</h2>
         <UserDetail />
       </div>
     </div>

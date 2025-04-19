@@ -34,7 +34,7 @@ const Added = () => {
 
                   </a>
                   <button className="btnclear" onClick={() => removeCart(product._id)}>
-                    Clear -
+                    Remove -
                   </button>
                 </div>
               </div>

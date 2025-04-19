@@ -85,7 +85,7 @@
   background-color: #c3bdc1;
 }
 
-.btnadd {
+.btnsave {
   background-color: #2b803a;
   color: white;
   font-size: 12px;
@@ -96,21 +96,21 @@
   margin-left: 30px;
 }
 
-.btnadd:hover {
+.btnsave:hover {
   background-color: #157347;
 }
 
-.btnclear {
+.btnremove {
   background-color: #b02a37;
   color: #fff;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 700;
   padding: 8px 20px;
   border-radius: 6px;
   border: none;
 }
 
-.btnclear:hover {
+.btnremove:hover {
   background-color: #9b1c2a;
 }
 

@@ -46,7 +46,7 @@ const DonorTable = () => {
                     <SideBar />
                 </div>
                 <div className="dashboard-content">
-                    <h2 className="text-danger text-start m-4">Blood Donor Details...</h2>
+                    <h2 className="text-success text-start m-4">Blood Donor Details...</h2>
                     <table className="table">
                         <thead>
                             <tr>
@@ -70,8 +70,8 @@ const DonorTable = () => {
                                     <td>{donor.status}</td>
                                     <td>
                                         <div className="d-flex align-items-center ">
-                                            <button className="btn btn-success  p-1 me-3 w-50" onClick={() => handleEdit(donor)}><i className="bi bi-pencil-square me-1"></i>Edit</button>
-                                            <button className="btn bg-danger p-1 me-3 w-50" onClick={() => handleDelete(donor._id)}><i className="bi bi-trash me-1 "></i>Delete</button>
+                                            <button className="btn btn-success  p-1 me-3 w-50" onClick={() => handleEdit(donor)}><i className="bi bi-pencil-square me-1"></i></button>
+                                            <button className="btn bg-danger p-1 me-3 w-50" onClick={() => handleDelete(donor._id)}><i className="bi bi-trash me-1 "></i></button>
                                         </div>
                                     </td>
 

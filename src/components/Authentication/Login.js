@@ -49,7 +49,7 @@ const Login = () => {
     };
 
     return (
-        <div className="container-fluid d-flex align-items-center justify-content-center min-vh-100">
+        <div className="container-fluid d-flex align-items-center justify-content-center min-vh-100 bg-success ">
             <div className="col-12 col-sm-8 col-md-6 col-lg-4">
                 <form className="form" onSubmit={handleSubmit}>
                     <p className="heading">Sign in</p>

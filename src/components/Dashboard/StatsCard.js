@@ -3,7 +3,7 @@ import { useCart } from "../../context/CartContext";
 import "../../styles/StatsCard.css"
 
 const StatsCard = () => {
-  const { donors,users,contacts } = useCart();  // Removed cart as it's unused
+  const { donors,users } = useCart();  // Removed cart as it's unused
 
   return (
     <div className="stats-container">
@@ -15,10 +15,10 @@ const StatsCard = () => {
         <h3>Users</h3>
         <p>{users.length}</p> {/* Change this dynamically if needed */}
       </div>
-      <div className="stats-card">
+      {/* <div className="stats-card">
         <h3>Contact Us</h3>
-        <p>{contacts.length}</p> {/* Change this dynamically if needed */}
-      </div>
+        <p>{contacts.length}</p> 
+      </div> */}
     </div>
   );
 };

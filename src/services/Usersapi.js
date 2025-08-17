@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Base API instance
 const API = axios.create({
-  baseURL: "http://localhost:5000", // Update if needed
+  baseURL: "https://blood-donate-app.vercel.app/", // Update if needed
   headers: { "Content-Type": "application/json" },
 });
 

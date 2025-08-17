@@ -12,15 +12,27 @@ import Register from "../components/Authentication/Register";
 import Contact from "../pages/Contact";
 import ContactUs from "../components/Dashboard/ContactUs";
 
-
-
 const AllRoutes = () => {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+
   return (
     <Routes>
-      {/* ✅ Public Routes (No Protection) */}
+      {/* ✅ Public Routes */}
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Navigate to="/login" />} /> {/* ✅ Redirect guests to login */}
+
+      {/* ✅ Default redirect based on auth */}
+      <Route
+        path="/"
+        element={
+          token
+            ? role === "admin"
+              ? <Navigate to="/dashboard" replace />
+              : <Navigate to="/home" replace />
+            : <Navigate to="/login" replace />
+        }
+      />
 
       {/* ✅ Protected Routes for Users */}
       <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
@@ -39,8 +51,17 @@ const AllRoutes = () => {
         <Route path="/contactus" element={<ContactUs />} />
       </Route>
 
-      {/* ✅ Catch-All Route */}
-      <Route path="*" element={<Navigate to="/" />} />
+      {/* ✅ Catch-All → Redirect properly */}
+      <Route
+        path="*"
+        element={
+          token
+            ? role === "admin"
+              ? <Navigate to="/dashboard" replace />
+              : <Navigate to="/home" replace />
+            : <Navigate to="/login" replace />
+        }
+      />
     </Routes>
   );
 };

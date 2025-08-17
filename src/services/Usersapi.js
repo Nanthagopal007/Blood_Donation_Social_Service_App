@@ -1,8 +1,11 @@
 import axios from "axios";
 
-// Base API instance
+// ✅ Correct base API instance
 const API = axios.create({
-  baseURL: "https://blood-donate-app.vercel.app/", // Update if needed
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "https://blood-donate-api.onrender.com" // 👈 Replace with your backend deployment URL
+      : "http://localhost:5000", // 👈 Local dev backend
   headers: { "Content-Type": "application/json" },
 });
 
@@ -25,17 +28,12 @@ export const loginUser = async (formData) => {
     }
 
     return response.data;
-
   } catch (err) {
-    // Detailed error handling
     if (err.response) {
-      // Backend responded with error
       throw new Error(err.response.data?.message || "Login failed. Please try again.");
     } else if (err.request) {
-      // No response from server
       throw new Error("Unable to connect to server. Please try again later.");
     } else {
-      // Unexpected error
       throw new Error("An unexpected error occurred. Please try again.");
     }
   }

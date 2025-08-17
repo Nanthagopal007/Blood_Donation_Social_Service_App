@@ -13,8 +13,10 @@ const ProtectedRoute = ({ allowedRoles }) => {
   }
 
   if (!role || !allowedRoles.includes(role)) {
-    console.warn("🚨 Unauthorized role! Redirecting to home.");
-    return <Navigate to="/" replace />;
+    console.warn("🚨 Unauthorized role! Redirecting to correct home.");
+    return role === "admin" 
+      ? <Navigate to="/dashboard" replace /> 
+      : <Navigate to="/home" replace />;
   }
 
   return <Outlet />;

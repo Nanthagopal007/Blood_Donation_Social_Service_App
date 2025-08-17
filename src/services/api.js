@@ -1,31 +1,31 @@
 import axios from "axios";
 
-// ✅ Create API instance
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://blood-donate-app.onrender.com";
+// ✅ Decide baseURL depending on environment
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || // take from .env if available
+  (process.env.NODE_ENV === "production"
+    ? "https://blood-donate-api.onrender.com" // 👈 your deployed backend URL
+    : "http://localhost:5000");               // 👈 local backend for dev
 
+// ✅ Create API instance
 const API = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true, // ✅ Important
+  withCredentials: true, // if you ever use cookies for auth
 });
 
-
-
-
-// ✅ Add request interceptor to automatically attach token if available
+// ✅ Request interceptor to attach token automatically
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Automatically adds the token here
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 export default API;

@@ -1,99 +1,78 @@
 import axios from "axios";
 
-// ✅ Correct base API instance
 const API = axios.create({
-  baseURL:
-    process.env.NODE_ENV === "production"
-      ? "https://blood-donate-api.onrender.com" // 👈 Replace with your backend deployment URL
-      : "http://localhost:5000", // 👈 Local dev backend
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
   headers: { "Content-Type": "application/json" },
 });
 
-// ✅ Helper to get token safely
-export const getToken = () => {
+// Attach token automatically
+API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  return token ? token : "";
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+// Register
+export const registerUser = async (data) => {
+  try {
+    const res = await API.post("/users/register", data);
+    return { success: true, data: res.data };
+  } catch (error) {
+    return { success: false, error: error.response?.data?.message || "Registration failed" };
+  }
 };
 
-// ✅ Login User
+// Login
 export const loginUser = async (formData) => {
   try {
-    const response = await API.post("/api/users/login", formData);
-
-    if (response.data.token) {
-      // Store token without "Bearer " prefix
-      localStorage.setItem("token", response.data.token.replace("Bearer ", ""));
-      localStorage.setItem("role", response.data.role);
-      localStorage.setItem("email", response.data.email);
+    const res = await API.post("/users/login", formData);
+    if (res.data.token) {
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.role);
+      localStorage.setItem("email", res.data.email);
     }
-
-    return response.data;
+    return res.data;
   } catch (err) {
-    if (err.response) {
-      throw new Error(err.response.data?.message || "Login failed. Please try again.");
-    } else if (err.request) {
-      throw new Error("Unable to connect to server. Please try again later.");
-    } else {
-      throw new Error("An unexpected error occurred. Please try again.");
-    }
+    if (err.response?.data?.message) throw new Error(err.response.data.message);
+    else throw new Error("Unable to connect to server");
   }
 };
 
-// ✅ Register User
-export const registerUser = async (userData) => {
+// Get current user
+export const getCurrentUser = async () => {
   try {
-    const response = await API.post("/api/users/register", userData);
-    return response.data;
+    const res = await API.get("/users/current");
+    return res.data;
   } catch (err) {
-    if (err.response) {
-      throw new Error(err.response.data?.message || "Registration failed. Try again.");
-    } else if (err.request) {
-      throw new Error("Unable to connect to server. Please try again later.");
-    } else {
-      throw new Error("An unexpected error occurred. Please try again.");
-    }
+    throw new Error(err.response?.data?.message || "Unauthorized");
   }
 };
 
-// ✅ Get Current User
-export const getCurrentUser = () => {
-  const token = getToken();
-  const role = localStorage.getItem("role");
-  const email = localStorage.getItem("email");
-
-  return token && role ? { token, role, email } : null;
-};
-
-// ✅ Get All Users (Admin Only)
-export const getAllUsers = async () => {
-  const token = getToken();
+// Fetch all users (Admin)
+export const fetchUsers = async () => {
   try {
-    const response = await API.get("/api/users/all", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return response.data;
+    const res = await API.get("/users/all");
+    return { success: true, data: res.data };
   } catch (err) {
-    if (err.response) throw new Error(err.response.data?.message || "Failed to fetch users");
-    else throw new Error("Unable to connect to server. Please try again later.");
+    return { success: false, data: [], error: err.response?.data?.message || "Fetch failed" };
   }
 };
 
-// ✅ Delete User (Admin Only)
-export const deleteUser = async (userId) => {
-  const token = getToken();
+// Delete user (Admin)
+export const deleteUser = async (id) => {
   try {
-    await API.delete(`/api/users/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await API.delete(`/users/${id}`);
+    return { success: true };
   } catch (err) {
-    if (err.response) throw new Error(err.response.data?.message || "Error deleting user");
-    else throw new Error("Unable to connect to server. Please try again later.");
+    return { success: false, error: err.response?.data?.message || "Delete failed" };
   }
 };
 
-// ✅ Logout User
+// Logout
 export const logoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("role");
   localStorage.removeItem("email");
 };
+
+export default API;

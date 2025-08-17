@@ -23,11 +23,10 @@ export default function Login() {
       alert("✅ Login Successful!");
       navigate(data.role === "admin" ? "/dashboard" : "/home", { replace: true });
     } catch (err) {
-      // Prefer backend message if available
-      const errorMsg = err.response?.data?.message || err.message || "Something went wrong";
-      setError(errorMsg);
-      console.error(`Error ${err.response?.status || ""}: ${errorMsg}`);
-    } finally {
+  setError(err.message); // will now correctly show "Password mismatch" or "Email not registered"
+  console.error(err);
+}
+ finally {
       setLoading(false);
     }
   };

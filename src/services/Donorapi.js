@@ -1,51 +1,45 @@
-import API from "../services/api";
+import API from "./api";
 
 // ✅ Fetch all donors
 export const fetchDonors = async () => {
   try {
-    const response = await API.get("/api/donors");
-    return response.data;
+    const response = await API.get("/donors"); // frontend calls /api/donors via api.js baseURL
+    return { success: true, data: response.data };
   } catch (error) {
     console.error("❌ Fetch Donors Error:", error.response?.data?.message || error.message);
-    return [];
+    return { success: false, data: [] };
   }
 };
 
 // ✅ Add a new donor
 export const addDonor = async (donorData) => {
   try {
-    const response = await API.post("/api/donors", donorData, {
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.status === 201) {
-      console.log("✅ Donor added successfully:", response.data);
-      return response.data;
-    }
+    const response = await API.post("/donors", donorData);
+    return { success: true, data: response.data };
   } catch (error) {
-    console.error("❌ Error adding donor:", error.response?.data?.message || error.message);
-    return null;
+    console.error("❌ Add Donor Error:", error.response?.data?.message || error.message);
+    return { success: false, data: null };
   }
 };
 
 // ✅ Update donor
 export const updateDonor = async (id, updatedData) => {
   try {
-    const response = await API.put(`/api/donors/${id}`, updatedData);
-    return response.data;
+    const response = await API.put(`/donors/${id}`, updatedData);
+    return { success: true, data: response.data };
   } catch (error) {
     console.error("❌ Update Donor Error:", error.response?.data?.message || error.message);
-    throw error.response?.data?.message || "Update failed!";
+    return { success: false, error: error.response?.data?.message || "Update failed" };
   }
 };
 
 // ✅ Delete donor
 export const deleteDonor = async (id) => {
   try {
-    await API.delete(`/api/donors/${id}`);
-    return true;
+    await API.delete(`/donors/${id}`);
+    return { success: true };
   } catch (error) {
     console.error("❌ Delete Donor Error:", error.response?.data?.message || error.message);
-    return false;
+    return { success: false, error: error.response?.data?.message || "Delete failed" };
   }
 };

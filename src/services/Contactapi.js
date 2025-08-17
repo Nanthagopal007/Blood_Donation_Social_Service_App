@@ -1,46 +1,43 @@
-import API from "../services/api";
+import API from "./api";
 
 // ✅ Fetch all contacts
 export const fetchContacts = async () => {
   try {
-    const response = await API.get("/api/contacts");
-    return response.data;
+    const response = await API.get("/contacts"); // → /api/contacts via api.js baseURL
+    return { success: true, data: response.data };
   } catch (error) {
-    console.error("❌ Fetch Contacts Error:", error.response?.data?.message || error.message);
-    return [];
-  }
-};
-
-// ✅ Fetch Contact by ID
-export const fetchContactById = async (id) => {
-  try {
-    const response = await API.get(`/api/contacts/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("❌ Fetch Contact By ID Error:", error.response?.data?.message || error.message);
-    return null;
+    console.error(
+      "❌ Fetch Contacts Error:",
+      error.response?.data?.message || error.message
+    );
+    return { success: false, data: [] };
   }
 };
 
 // ✅ Add a new contact
 export const addContact = async (contactData) => {
   try {
-    const response = await API.post("/api/contacts", contactData);  // Removed redundant headers
-    return response.data;
+    const response = await API.post("/contacts", contactData);
+    return { success: true, data: response.data };
   } catch (error) {
-    console.error("❌ Error adding contact:", error.response?.data?.message || error.message);
-    return null;
+    console.error(
+      "❌ Add Contact Error:",
+      error.response?.data?.message || error.message
+    );
+    return { success: false, data: null };
   }
 };
 
-// ✅ Delete Contact
+// ✅ Delete contact
 export const deleteContact = async (id) => {
   try {
-    await API.delete(`/api/contacts/${id}`);  // Removed redundant headers
-    console.log(`✅ Contact with ID ${id} deleted successfully.`);
-    return true;
+    await API.delete(`/contacts/${id}`);
+    return { success: true };
   } catch (error) {
-    console.error("❌ Delete Contact Error:", error.response?.data?.message || error.message);
-    return false;
+    console.error(
+      "❌ Delete Contact Error:",
+      error.response?.data?.message || error.message
+    );
+    return { success: false, error: error.response?.data?.message || "Delete failed" };
   }
 };

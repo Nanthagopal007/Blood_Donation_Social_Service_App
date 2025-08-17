@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { fetchDonors } from "../services/Donorapi";
-import { getAllUsers, deleteUser } from "../services/Usersapi";
+import { fetchUsers as fetchUsersApi, deleteUser } from "../services/Usersapi";
 import { fetchContacts } from "../services/Contactapi";
 import { useAuth } from "./AuthContext";
 
@@ -20,73 +20,87 @@ export const CartProvider = ({ children }) => {
   const [contacts, setContacts] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
 
-  // ✅ Donor-related
+  // ✅ Add donor to cart
   const addCart = (donor) => {
     if (!donor || !donor._id) {
       alert("❌ Invalid donor!");
-      return;
+      return false;
     }
     const isAlreadyAdded = cart.some((item) => item._id === donor._id);
     if (isAlreadyAdded) {
       alert("⚠️ Donor is already in the cart!");
-    } else {
-      setCart([...cart, donor]);
-      alert("✅ Donor added to cart successfully!");
+      return false;
     }
+    setCart((prev) => [...prev, donor]);
+    alert("✅ Donor added to cart successfully!");
+    return true;
   };
 
+  // ✅ Remove donor from cart
   const removeCart = (id) => {
     if (!id) {
       alert("❌ Invalid donor ID!");
-      return;
+      return false;
     }
     const isInCart = cart.some((item) => item._id === id);
     if (!isInCart) {
       alert("❌ Donor not found in the cart!");
-      return;
+      return false;
     }
-    setCart(cart.filter((item) => item._id !== id));
+    setCart((prev) => prev.filter((item) => item._id !== id));
     alert("🗑️ Donor removed from cart!");
+    return true;
   };
 
+  // ✅ Fetch donors
   const getDonors = async () => {
     try {
-      const data = await fetchDonors();
-      setDonors(data);
+      const res = await fetchDonors();
+      if (res.success) {
+        setDonors(res.data);
+      }
     } catch (error) {
-      console.error("Fetch Donors Error:", error.message);
+      console.error("❌ Fetch Donors Error:", error.message);
     }
   };
 
-  const fetchUsers = async () => {
+  // ✅ Fetch all users (using correct API function)
+  const loadUsers = async () => {
     try {
-      const userData = await getAllUsers();
-      console.log("Fetched Users:", userData);
-      setUsers(userData);
+      const res = await fetchUsersApi(); // ✅ use imported fetchUsers
+      if (res.success) {
+        setUsers(res.data);
+      }
     } catch (error) {
-      console.error("Error fetching users:", error.message);
+      console.error("❌ Error fetching users:", error.message);
     }
   };
 
+  // ✅ Delete user
   const handleDelete = async (userId) => {
     try {
-      await deleteUser(userId);
-      setUsers(users.filter((user) => user._id !== userId));
-      console.log("User deleted successfully");
+      const res = await deleteUser(userId);
+      if (res.success) {
+        setUsers((prevUsers) => prevUsers.filter((u) => u._id !== userId));
+      }
     } catch (error) {
-      console.error("Error deleting user:", error.message);
+      console.error("❌ Error deleting user:", error.message);
     }
   };
 
+  // ✅ Fetch contacts
   const loadContacts = async () => {
     try {
-      const data = await fetchContacts();
-      setContacts(data);
+      const res = await fetchContacts();
+      if (res.success) {
+        setContacts(res.data);
+      }
     } catch (error) {
-      console.error("Error fetching contacts:", error.message);
+      console.error("❌ Error fetching contacts:", error.message);
     }
   };
 
+  // ✅ Select contact
   const handleSelectContact = (contact) => {
     setSelectedContact(contact);
   };
@@ -94,7 +108,7 @@ export const CartProvider = ({ children }) => {
   // ✅ Effects
   useEffect(() => {
     getDonors();
-    fetchUsers();
+    loadUsers(); // ✅ corrected
     loadContacts();
   }, []);
 
@@ -113,7 +127,7 @@ export const CartProvider = ({ children }) => {
         removeCart,
         user,
         users,
-        fetchUsers,
+        loadUsers,   // ✅ provide correct fn
         handleDelete,
         contacts,
         selectedContact,
@@ -125,6 +139,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-export const useCart = () => {
-  return useContext(CartContext);
-};
+export const useCart = () => useContext(CartContext);

@@ -1,33 +1,63 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getCurrentUser, loginUser, logoutUser } from "../services/Usersapi";
+import { loginUser, logoutUser, registerUser, getCurrentUser } from "../services/Usersapi";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const currentUser = getCurrentUser();
-    setUser(currentUser); // ✅ Load user from localStorage
-  }, []);
-
-  const login = async (credentials) => {
-    const data = await loginUser(credentials);
-    setUser(data);
+  // ✅ Register
+  const signup = async (formData) => {
+    const res = await registerUser(formData);
+    if (res.success) {
+      localStorage.setItem("token", res.token);
+      setUser(res.user);
+    }
+    return res;
   };
 
-  const logout = () => {
-    logoutUser();
+  // ✅ Login
+  const login = async (formData) => {
+    const res = await loginUser(formData);
+    if (res.success) {
+      localStorage.setItem("token", res.token);
+      setUser(res.user);
+    }
+    return res;
+  };
+
+  // ✅ Logout
+  const logout = async () => {
+    await logoutUser();
     setUser(null);
   };
 
+  // ✅ Get current user from token
+  const loadUser = async () => {
+    try {
+      const res = await getCurrentUser();
+      if (res.success) {
+        setUser(res.data);
+      } else {
+        setUser(null);
+      }
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, signup, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

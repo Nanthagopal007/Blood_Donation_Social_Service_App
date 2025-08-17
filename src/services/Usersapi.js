@@ -1,28 +1,43 @@
-import API from "../services/api";
+import axios from "axios";
+
+// Base API instance
+const API = axios.create({
+  baseURL: "http://localhost:5000", // Update if needed
+  headers: { "Content-Type": "application/json" },
+});
 
 // ✅ Helper to get token safely
 export const getToken = () => {
   const token = localStorage.getItem("token");
-  return token && token.startsWith("Bearer ") ? token.split(" ")[1] : token || "";
+  return token ? token : "";
 };
 
 // ✅ Login User
-export const loginUser = async (credentials) => {
+export const loginUser = async (formData) => {
   try {
-    const response = await API.post("/api/users/login", credentials);
+    const response = await API.post("/api/users/login", formData);
 
     if (response.data.token) {
-      // ✅ Ensure token is stored without "Bearer "
-      const token = response.data.token.replace("Bearer ", "");
-      localStorage.setItem("token", token);
+      // Store token without "Bearer " prefix
+      localStorage.setItem("token", response.data.token.replace("Bearer ", ""));
       localStorage.setItem("role", response.data.role);
       localStorage.setItem("email", response.data.email);
     }
 
     return response.data;
-  } catch (error) {
-    console.error("❌ Login Error:", error.response?.data?.message || error.message);
-    throw new Error(error.response?.data?.message || "Login failed. Please try again.");
+
+  } catch (err) {
+    // Detailed error handling
+    if (err.response) {
+      // Backend responded with error
+      throw new Error(err.response.data?.message || "Login failed. Please try again.");
+    } else if (err.request) {
+      // No response from server
+      throw new Error("Unable to connect to server. Please try again later.");
+    } else {
+      // Unexpected error
+      throw new Error("An unexpected error occurred. Please try again.");
+    }
   }
 };
 
@@ -31,9 +46,14 @@ export const registerUser = async (userData) => {
   try {
     const response = await API.post("/api/users/register", userData);
     return response.data;
-  } catch (error) {
-    console.error("❌ Registration Error:", error.response?.data?.message || error.message);
-    throw new Error(error.response?.data?.message || "Registration failed. Try again.");
+  } catch (err) {
+    if (err.response) {
+      throw new Error(err.response.data?.message || "Registration failed. Try again.");
+    } else if (err.request) {
+      throw new Error("Unable to connect to server. Please try again later.");
+    } else {
+      throw new Error("An unexpected error occurred. Please try again.");
+    }
   }
 };
 
@@ -48,14 +68,15 @@ export const getCurrentUser = () => {
 
 // ✅ Get All Users (Admin Only)
 export const getAllUsers = async () => {
-  //const token = getToken();
+  const token = getToken();
   try {
-    const response = await API.get("/api/users/all");
-
+    const response = await API.get("/api/users/all", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
-  } catch (error) {
-    console.error("❌ Error fetching users:", error.response?.data?.message || error.message);
-    throw new Error(error.response?.data?.message || "Failed to fetch users");
+  } catch (err) {
+    if (err.response) throw new Error(err.response.data?.message || "Failed to fetch users");
+    else throw new Error("Unable to connect to server. Please try again later.");
   }
 };
 
@@ -64,13 +85,11 @@ export const deleteUser = async (userId) => {
   const token = getToken();
   try {
     await API.delete(`/api/users/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,  // Ensure Authorization header is set with token
-      },
+      headers: { Authorization: `Bearer ${token}` },
     });
-  } catch (error) {
-    console.error("❌ Error deleting user:", error.response?.data?.message || error.message);
-    throw new Error(error.response?.data?.message || "Error deleting user");
+  } catch (err) {
+    if (err.response) throw new Error(err.response.data?.message || "Error deleting user");
+    else throw new Error("Unable to connect to server. Please try again later.");
   }
 };
 

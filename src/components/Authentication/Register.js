@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from "../../services/Usersapi";
-import "../../styles/Register.css";
+import styles from "../../styles/Register.module.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,95 +11,134 @@ const Register = () => {
     role: "user",
   });
 
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const validateField = (name, value) => {
+    let errorMsg = "";
+
+    if (name === "name") {
+      if (value.trim().length < 4) {
+        errorMsg = "Name must be at least 4 characters long";
+      } else if (!/^[A-Z]/.test(value)) {
+        errorMsg = "First letter must be capital";
+      }
+    }
+
+    if (name === "email") {
+      if (value.length < 6) {
+        errorMsg = "Email must be at least 6 characters";
+      } else if (!value.endsWith("@gmail.com")) {
+        errorMsg = "Email must end with @gmail.com";
+      }
+    }
+
+    if (name === "password") {
+      if (value.length < 6) {
+        errorMsg = "Password must be at least 6 characters";
+      }
+    }
+
+    setErrors((prev) => ({ ...prev, [name]: errorMsg }));
+  };
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+
+    if (name === "name" && value.length > 0) {
+      value = value.charAt(0).toUpperCase() + value.slice(1);
+    }
+    if (name === "email") {
+      value = value.toLowerCase();
+    }
+
+    setFormData({ ...formData, [name]: value });
+    validateField(name, value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
 
+    Object.keys(formData).forEach((field) =>
+      validateField(field, formData[field])
+    );
+
+    if (Object.values(errors).some((err) => err)) return;
+
+    setLoading(true);
     try {
       await registerUser(formData);
       alert("✅ Registration Successful! Please Login.");
       navigate("/login");
     } catch (error) {
-      setError(error.response?.data?.message || "Registration failed! Try again.");
+      setErrors({ api: error.response?.data?.message || "Registration failed! Try again." });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className='container-fluid bg-success min-vh-100 '>
-      <div className='row justify-content-center'>
-        <div className='col-12 col-sm-8 col-md-6 col-lg-4 mt-5 pt-5'>
-          <form className="form" onSubmit={handleSubmit}>
-            <p className="heading">Sign up</p>
-            <p className='subheading'>Create your own account now...</p>
+    <div className={`container-fluid ${styles.cf}`}>
+  <form className={styles.form} onSubmit={handleSubmit}>
+    <p className={styles.heading}>Sign up</p>
+    <p className={styles.subheading}>Create your own account now...</p>
 
-            {error && <p className="error-message">{error}</p>}
+    {errors.api && <p className={styles.errorMessage}>{errors.api}</p>}
 
-            <label>Username</label>
-            <input
-              className="input"
-              name="name"
-              placeholder="Username"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+    <label>Username</label>
+    <input
+      className={styles.input}
+      name="name"
+      placeholder="Username"
+      type="text"
+      value={formData.name}
+      onChange={handleChange}
+    />
+    {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
 
-            <label className='email'>Email</label>
-            <input
-              className="input"
-              name="email"
-              placeholder="Email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+    <label>Email</label>
+    <input
+      className={styles.input}
+      name="email"
+      placeholder="Email"
+      type="email"
+      value={formData.email}
+      onChange={handleChange}
+    />
+    {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
 
-            <label className='password'>Password</label>
-            <input
-              className="input"
-              name="password"
-              placeholder="Password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+    <label>Password</label>
+    <input
+      className={styles.input}
+      name="password"
+      placeholder="Password"
+      type="password"
+      value={formData.password}
+      onChange={handleChange}
+    />
+    {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
 
-            <label>Select your role</label>
-            <select
-              className="input select-input"
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-            >
-              <option value="user">Donor</option>
-              <option value="admin">Admin</option>
-            </select>
+    <label>Select your role</label>
+    <select
+      className={`${styles.input} ${styles.selectInput}`}
+      name="role"
+      value={formData.role}
+      onChange={handleChange}
+    >
+      <option value="user">Donor</option>
+    </select>
 
-            <button type="submit" className="btn" disabled={loading}>
-              {loading ? "Registering..." : "SIGN UP"}
-            </button>
+    <button type="submit" className={styles.btn} disabled={loading}>
+      {loading ? "Registering..." : "SIGN UP"}
+    </button>
 
-            <p className="link mt-3">
-              Already have an account? <Link to="/login">Sign In</Link>
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
+    <p className={styles.link}>
+      Already have an account? <Link to="/login" className={styles.signinLink}>Sign In</Link>
+    </p>
+  </form>
+</div>
+
   );
 };
 

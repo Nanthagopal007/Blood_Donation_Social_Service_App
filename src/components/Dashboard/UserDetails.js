@@ -1,5 +1,5 @@
-import "../styles/UserDetails.css"
-import { useCart } from "../context/CartContext";
+import "../../styles/UserDetails.css"
+import { useCart } from "../../context/CartContext";
 
 const UserDetails = () => {
   const { users, handleDelete } = useCart(); // Get donors & cart from context

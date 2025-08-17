@@ -1,52 +1,84 @@
-/* Make brand image neat */
-.Brand {
+/* Navbar background */
+.navbar {
+  background-color: rgb(64, 141, 128); /* Your custom color */
+}
+
+/* Brand logo */
+.brand-logo, .Brand {
   height: 50px;
   width: auto;
   border-radius: 8px;
+
 }
 
-/* Logout button styling */
-.logout {
-  background-color:#1a8e5a;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 6px 14px;
-  border-radius: 6px;
-  border: none;
-  margin-left: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.logout:hover {
-  background-color: #467b4b;
-  color: #0a3622;
-}
-
-/* Optional: increase spacing on right links */
-.navbar-nav .nav-item {
+/* Nav link styles */
+ul li {
+  font-weight: 600;
+  font-size: 18px;
+  color: aliceblue !important;
+  font-weight: 700;
   margin-left: 15px;
- font-size: 18px;
-  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-/* Active grey background */
-.active-grey {
-  background-color: #467b4b !important; /* Bootstrap grey */
-  border-radius: 6px;
-  padding: 4px 12px;
-  transition: background-color 0.3s ease;
-}
-
-.nav-link:hover {
-  background-color: #467b4b; /* slightly darker grey */
-  border-radius: 5px;
-}
-.sup{
+.navbar-nav .nav-link {
   color: white;
-  background-color: red;
-  border-radius: 20%;
-  padding: 2px 4px; 
-  font-size: 16px;
+  transition: color 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: yellow !important;
+}
+
+/* Active nav link style */
+nav .active-link {
   font-weight: 600;
+  font-size: 18px;
+  color: aliceblue;
+  border-bottom: 2px solid white;
+}
+
+/* Logout button custom style */
+ul li .logout-btn, .btn-outline-light {
+  background-color: #b62020;
+  color: white;
+  border: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover, .btn-outline-light:hover {
+  background-color: #d32f2f;
+  color: white;
+}
+
+/* Superscript badge for cart count */
+.cart-badge, sup {
+  background-color: white;
+  color: #b71c1c;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: -10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .navbar-nav .nav-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .brand-logo, .Brand {
+    width: 100px;
+  }
+
+  .logout-btn, .btn-outline-light {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+  }
 }

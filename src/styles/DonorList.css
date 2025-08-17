@@ -1,122 +1,127 @@
+/* Main container */
 .donor-list-container {
   padding: 20px;
+  /* max-width: 1200px; */
   width: 100%;
-  box-sizing: border-box;
+  margin: auto;
 }
 
-/* Grid wrapper */
+/* Cards wrapper using flexbox */
 .donor-cards-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  padding-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
 
-/* Donor Card */
+/* Donor card */
 .donor-card {
   background-color: #fff;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 300px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .donor-card:hover {
-  transform: translateY(-5px);
-  border: 1px solid #79a28f;
-  box-shadow: 0 6px 20px rgba(140, 168, 155, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Donor Image */
+/* Donor image */
 .donor-img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 }
 
-/* Card Body */
+/* Card body */
 .card-body {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-/* Name Styling */
-.card-title {
-  font-size: 1.2rem;
+/* Card title */
+div h5{
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #d32f2f;
-  font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
-/* Text Info */
+/* Card text */
 .card-text {
   font-size: 0.95rem;
-  color: #333;
-  margin-bottom: 4px;
+  color: #555;
 }
 
-/* Status Badge */
+/* Status badge */
 .donor-status {
-  display: block;
-  font-size: 0.9rem;
-  padding: 6px 12px;
-  border-radius: 12px;
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
   font-weight: 500;
-  color: white;
-  text-align: center;
-  margin-top: 10px;
+  color: #fff;
+  margin-top: 8px;
 }
 
-/* Buttons */
+/* Phone button */
 .btnphone {
-  background-color: #646664;
+  background-color: #007bff;
   color: white;
-  font-size: 10px;
-  font-weight: 400;
-  padding: 8px 30px;
+  border: none;
+  padding: 8px 14px;
   border-radius: 6px;
-  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
 }
 
 .btnphone:hover {
-  background-color: #c3bdc1;
+  background-color: #0056b3;
+  color: white;
 }
 
+/* Save button */
 .btnsave {
-  background-color: #2b803a;
+  background-color: #28a745;
   color: white;
-  font-size: 12px;
-  font-weight: 700;  
-  padding: 8px 30px;
-  border-radius: 6px;
   border: none;
-  margin-left: 30px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
 }
 
 .btnsave:hover {
-  background-color: #157347;
+  background-color: #1e7e34;
 }
 
+/* Remove button */
 .btnremove {
-  background-color: #b02a37;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 8px 20px;
-  border-radius: 6px;
+  background-color: #dc3545;
+  color: white;
   border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
 }
 
 .btnremove:hover {
-  background-color: #9b1c2a;
+  background-color: #b02a37;
 }
 
-/* Responsive - optional (already handled by grid) */
-@media (max-width: 480px) {
-  .donor-img {
-    height: 160px;
+/* Responsive design */
+@media (max-width: 768px) {
+  .donor-card {
+    width: 100%;
+    max-width: 400px;
   }
 }

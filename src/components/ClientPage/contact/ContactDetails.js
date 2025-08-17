@@ -1,5 +1,5 @@
 import "../styles/ContactDetails.css"; // Import CSS for styling
-import { useCart } from "../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 const ContactDetails = () => {
 

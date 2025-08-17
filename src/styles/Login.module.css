@@ -1,0 +1,83 @@
+
+.cf{
+  height: 100vh;
+  background-color: #91a8c0;
+}
+
+.loginContainer {
+  max-width: 400px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 100px;
+}
+
+.loginTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin: 8px 0 4px;
+  font-weight: 500;
+  color: #444;
+}
+
+.loginInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.signupText {
+  font-size: 14px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.signupLink {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+.loginButton {
+  padding: 10px;
+  background: #288ca7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.loginButton:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.loginButton:hover:not(:disabled) {
+  background: #0056b3;
+}

@@ -1,0 +1,84 @@
+.cf {
+  min-height: 100vh;            /* full height */
+  display: flex;                /* flexbox */
+  justify-content: center;      /* horizontal center */
+  align-items: center;          /* vertical center */
+  background-color: #91a8c0;
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;             /* fixed max width */
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.subheading {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.selectInput {
+  cursor: pointer;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #288ca7;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.link {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.signinLink {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signinLink:hover {
+  text-decoration: underline;
+}

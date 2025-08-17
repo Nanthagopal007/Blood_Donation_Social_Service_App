@@ -1,13 +1,13 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-  }
-  
-  /* Style for the entire app container */
-  .App {
-    text-align: center;
-    padding: 20px;
-  }
 
+/* Style for the entire app container */
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Control scrolling */
+html, body {
+  overflow-x: hidden; /* only hide horizontal scroll */
+  overflow-y: auto;   /* keep vertical scroll */
+  min-height: 100%;
+}

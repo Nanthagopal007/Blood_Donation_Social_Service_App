@@ -1,9 +1,8 @@
-import React from 'react'
 
 const FooterPage = () => {
   
   return (
-    <div className=' container-fluid bg-success p-2'>
+    <div style={{backgroundColor:"rgb(64, 141, 128)"}}  className=' container-fluid  p-2'>
       <div className='row'>
         <div className='col'>
         </div>

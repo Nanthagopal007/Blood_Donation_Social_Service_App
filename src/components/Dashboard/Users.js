@@ -1,6 +1,5 @@
-import React from "react";
 import SideBar from "./SideBar";
-import UserDetail from "../UserDetails";
+import UserDetail from "../Dashboard/UserDetails";
 import "../../styles/Users.css"; // Import the CSS file
 
 const Users = () => {

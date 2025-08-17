@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import AllRoutes from "./routes/AllRoutes";
 import { AuthProvider } from "./context/AuthContext"; // ✅ Import AuthProvider

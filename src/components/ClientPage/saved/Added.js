@@ -1,7 +1,6 @@
-import React from 'react';
-import { useCart } from '../context/CartContext';
-import img from "../assets/bloodhand.jpeg";
-import "../styles/Added.css";
+import { useCart } from '../../../context/CartContext';
+import img from "../../../assets/bloodhand.jpeg";
+import "../../../styles/Added.css";
 
 const Added = () => {
   const { cart, removeCart } = useCart();

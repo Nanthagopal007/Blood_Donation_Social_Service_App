@@ -1,7 +1,6 @@
-import React from 'react'
-import NavBar from '../components/NavBar'
-import DonorList from '../components/DonorList'
-import FooterPage from '../components/FooterPage'
+import NavBar from '../components/ClientPage/common/NavBar.js'
+import DonorList from '../components/ClientPage/home/DonorList.js'
+import FooterPage from '../components/ClientPage/common/FooterPage.js'
 
 const Home = () => {
     return (

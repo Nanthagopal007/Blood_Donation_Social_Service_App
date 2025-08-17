@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { addContact } from "../services/Contactapi";
-import "../styles/ContactForm.css";
+import { addContact } from "../../../services/Contactapi";
+import "../../../styles/ContactForm.css";
 
 const ContactForm = () => {
     const [contact, setContact] = useState({

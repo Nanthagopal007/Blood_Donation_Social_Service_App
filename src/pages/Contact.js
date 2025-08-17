@@ -1,7 +1,7 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
-import ContactForm from '../components/ContactForm'
-import FooterPage from '../components/FooterPage'
+import NavBar from '../components/ClientPage/common/NavBar'
+import ContactForm from '../components/ClientPage/contact/ContactForm'
+import FooterPage from '../components/ClientPage/common/FooterPage'
 
 const Contact = () => {
   return (

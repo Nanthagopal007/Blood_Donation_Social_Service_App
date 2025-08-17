@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { addDonor } from "../services/Donorapi";
-import "../styles/AddDonorForm.css";
+import { addDonor } from "../../../services/Donorapi";
+import "../../../styles/AddDonorForm.css";
 
 const AddDonorForm = () => {
     const [donor, setDonor] = useState({

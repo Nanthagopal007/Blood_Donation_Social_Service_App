@@ -1,6 +1,5 @@
-import React from 'react'
 import SideBar from './SideBar'
-import ContactDetails from '../ContactDetails'
+import ContactDetails from '../Dashboard/UserDetails'
 import "../../styles/ContactUs.css"
 
 const ContactUs = () => {

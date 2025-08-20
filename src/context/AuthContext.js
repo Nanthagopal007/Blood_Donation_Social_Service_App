@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { loginUser, logoutUser, registerUser, getCurrentUser } from "../services/Usersapi";
+import { createContext, useContext,useState } from "react";
+import { loginUser, logoutUser, registerUser,} from "../services/Usersapi";
 
 const AuthContext = createContext();
 
@@ -34,24 +34,24 @@ export const AuthProvider = ({ children }) => {
   };
 
   // ✅ Get current user from token
-  const loadUser = async () => {
-    try {
-      const res = await getCurrentUser();
-      if (res.success) {
-        setUser(res.data);
-      } else {
-        setUser(null);
-      }
-    } catch {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const loadUser = async () => {
+  //   try {
+  //     const res = await getCurrentUser();
+  //     if (res.success) {
+  //       setUser(res.data);
+  //     } else {
+  //       setUser(null);
+  //     }
+  //   } catch {
+  //     setUser(null);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    loadUser();
-  }, []);
+  // useEffect(() => {
+  //   loadUser();
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ user, signup, login, logout, loading }}>

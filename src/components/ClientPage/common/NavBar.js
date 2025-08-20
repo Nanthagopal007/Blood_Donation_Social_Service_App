@@ -59,7 +59,7 @@ const NavBar = () => {
                 About
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
@@ -68,7 +68,7 @@ const NavBar = () => {
               >
                 Contact
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item position-relative">
               <NavLink
                 to="/viewcart"

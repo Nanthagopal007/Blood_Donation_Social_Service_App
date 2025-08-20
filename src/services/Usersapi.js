@@ -1,74 +1,97 @@
-import axios from "axios";
+import API from "./api";
 
-const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
-  headers: { "Content-Type": "application/json" },
-});
-
-// Attach token automatically
-API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
-
-// Register
+// ====================== REGISTER ======================
 export const registerUser = async (data) => {
   try {
     const res = await API.post("/users/register", data);
     return { success: true, data: res.data };
   } catch (error) {
-    return { success: false, error: error.response?.data?.message || "Registration failed" };
+    return {
+      success: false,
+      error: error.response?.data?.message || "Registration failed",
+    };
   }
 };
 
-// Login
+// ====================== LOGIN ======================
 export const loginUser = async (formData) => {
   try {
     const res = await API.post("/users/login", formData);
+
     if (res.data.token) {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
       localStorage.setItem("email", res.data.email);
     }
+
     return res.data;
   } catch (err) {
-    if (err.response?.data?.message) throw new Error(err.response.data.message);
-    else throw new Error("Unable to connect to server");
+    if (err.response?.data?.message) {
+      throw new Error(err.response.data.message);
+    }
+    throw new Error("Unable to connect to server");
   }
 };
 
-// Get current user
+// ====================== FETCH ALL USERS (Admin only) ======================
+export const fetchUsers = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await API.get("/users/all", {
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ attach token
+      },
+    });
+
+    return { success: true, data: res.data };
+  } catch (err) {
+    return {
+      success: false,
+      data: [],
+      error: err.response?.data?.message || "Fetch failed",
+    };
+  }
+};
+
+// ====================== DELETE USER (Admin only) ======================
+export const deleteUser = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    await API.delete(`/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ attach token
+      },
+    });
+
+    return { success: true };
+  } catch (err) {
+    return {
+      success: false,
+      error: err.response?.data?.message || "Delete failed",
+    };
+  }
+};
+
+// ====================== GET CURRENT USER ======================
 export const getCurrentUser = async () => {
   try {
-    const res = await API.get("/users/current");
+    const token = localStorage.getItem("token");
+
+    const res = await API.get("/users/current", {
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ attach token
+      },
+    });
+
     return res.data;
   } catch (err) {
     throw new Error(err.response?.data?.message || "Unauthorized");
   }
 };
 
-// Fetch all users (Admin)
-export const fetchUsers = async () => {
-  try {
-    const res = await API.get("/users/all");
-    return { success: true, data: res.data };
-  } catch (err) {
-    return { success: false, data: [], error: err.response?.data?.message || "Fetch failed" };
-  }
-};
-
-// Delete user (Admin)
-export const deleteUser = async (id) => {
-  try {
-    await API.delete(`/users/${id}`);
-    return { success: true };
-  } catch (err) {
-    return { success: false, error: err.response?.data?.message || "Delete failed" };
-  }
-};
-
-// Logout
+// ====================== LOGOUT ======================
 export const logoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("role");

@@ -9,7 +9,7 @@ import Users from "../components/Dashboard/Users";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "../components/Authentication/Login";
 import Register from "../components/Authentication/Register";
-import Contact from "../pages/Contact";
+// import Contact from "../pages/Contact";
 import ContactUs from "../components/Dashboard/ContactUs";
 
 const AllRoutes = () => {
@@ -26,11 +26,15 @@ const AllRoutes = () => {
       <Route
         path="/"
         element={
-          token
-            ? role === "admin"
-              ? <Navigate to="/dashboard" replace />
-              : <Navigate to="/home" replace />
-            : <Navigate to="/login" replace />
+          token && role ? (
+            role === "admin" ? (
+              <Navigate to="/dashboard" replace />
+            ) : (
+              <Navigate to="/home" replace />
+            )
+          ) : (
+            <Navigate to="/login" replace />
+          )
         }
       />
 
@@ -39,7 +43,7 @@ const AllRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/viewcart" element={<ViewCart />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        {/* <Route path="/contact" element={<Contact />} /> */}
         <Route path="/donorlist" element={<DonorList />} />
       </Route>
 
@@ -55,11 +59,15 @@ const AllRoutes = () => {
       <Route
         path="*"
         element={
-          token
-            ? role === "admin"
-              ? <Navigate to="/dashboard" replace />
-              : <Navigate to="/home" replace />
-            : <Navigate to="/login" replace />
+          token ? (
+            role === "admin" ? (
+              <Navigate to="/dashboard" replace />
+            ) : (
+              <Navigate to="/home" replace />
+            )
+          ) : (
+            <Navigate to="/login" replace />
+          )
         }
       />
     </Routes>

@@ -13,23 +13,42 @@ export default function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setLoading(true);
 
-    try {
-      const data = await loginUser(formData);
-      alert("✅ Login Successful!");
-      navigate(data.role === "admin" ? "/dashboard" : "/home", { replace: true });
-    } catch (err) {
-  setError(err.message); // will now correctly show "Password mismatch" or "Email not registered"
-  console.error(err);
-}
- finally {
-      setLoading(false);
-    }
-  };
+  //   try {
+  //     const data = await loginUser(formData);
+  //     alert("✅ Login Successful!");
+  //     navigate(data.role === "admin" ? "/dashboard" : "/home", {
+  //       replace: true,
+  //     });
+  //   } catch (err) {
+  //     setError(err.message); // will now correctly show "Password mismatch" or "Email not registered"
+  //     console.error(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const data = await loginUser(formData);
+
+    // store both token & role
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("role", data.role);
+
+    alert("✅ Login Successful!");
+
+    navigate(data.role === "admin" ? "/dashboard" : "/home", { replace: true });
+  } catch (err) {
+    console.error("❌ Login failed:", err.message);
+    setError(err.message);
+  }
+};
+
 
   return (
     <div className={`container-fluid pt-5 ${styles.cf}`}>
@@ -59,10 +78,17 @@ export default function Login() {
           />
 
           <p className={styles.signupText}>
-            Do you have an account? <Link to="/register" className={styles.signupLink}>Sign Up</Link>
+            Do you have an account?{" "}
+            <Link to="/register" className={styles.signupLink}>
+              Sign Up
+            </Link>
           </p>
 
-          <button className={styles.loginButton} type="submit" disabled={loading}>
+          <button
+            className={styles.loginButton}
+            type="submit"
+            disabled={loading}
+          >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>

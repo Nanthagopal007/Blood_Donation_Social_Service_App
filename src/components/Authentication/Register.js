@@ -127,6 +127,8 @@ const Register = () => {
       onChange={handleChange}
     >
       <option value="user">Donor</option>
+      <option value="admin">Admin</option>
+
     </select>
 
     <button type="submit" className={styles.btn} disabled={loading}>

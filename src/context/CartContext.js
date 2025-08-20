@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { fetchDonors } from "../services/Donorapi";
-import { fetchUsers as fetchUsersApi, deleteUser } from "../services/Usersapi";
+import { fetchUsers , deleteUser } from "../services/Usersapi";
 import { fetchContacts } from "../services/Contactapi";
 import { useAuth } from "./AuthContext";
 
@@ -67,7 +67,7 @@ export const CartProvider = ({ children }) => {
   // ✅ Fetch all users (using correct API function)
   const loadUsers = async () => {
     try {
-      const res = await fetchUsersApi(); // ✅ use imported fetchUsers
+      const res = await fetchUsers(); // ✅ use imported fetchUsers
       if (res.success) {
         setUsers(res.data);
       }

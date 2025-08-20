@@ -1,0 +1,45 @@
+.aboutContainer {
+  padding: 40px 20px;
+  margin: 50px;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+.aboutSection {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.aboutSection:hover {
+  transform: translateY(-4px);
+}
+
+.aboutSection h2 {
+  font-size: 20px;
+  color: #2f89d3; /* Red highlight for blood donation theme */
+  margin-bottom: 10px;
+}
+
+.aboutSection p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  margin: 6px 0;
+}
+
+.testimonialSection {
+  background: #fff3f3;
+  border-left: 5px solid #2f86d3;
+  font-style: italic;
+}
+
+.testimonialSection blockquote {
+  margin: 0;
+  padding: 10px;
+  font-size: 15px;
+  color: #333;
+}

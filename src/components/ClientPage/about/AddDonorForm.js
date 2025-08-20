@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addDonor } from "../../../services/Donorapi";
-import "../../../styles/AddDonorForm.css";
+import styles from "../../../styles/AddDonorForm.module.css";
 
 const AddDonorForm = () => {
     const [donor, setDonor] = useState({
@@ -39,10 +39,10 @@ const AddDonorForm = () => {
     };
 
     return (
-        <div className="about-container">
+        <div className={styles.aboutContainer}>
             <div className="row">
                 <div className="col">
-                    <section className="about-section">
+                    <section className={styles.aboutSection}>
                         <h2>How It Works?</h2>
                         <ul>
                             <li><strong>Register:</strong> Sign up and become a donor.</li>
@@ -50,33 +50,40 @@ const AddDonorForm = () => {
                             <li><strong>Contact & Donate:</strong> Connect and arrange a donation.</li>
                         </ul>
                     </section>
-                    <section className="about-section call-to-action mt-5">
+
+                    <section className={`${styles.aboutSection} mt-5`}>
                         <h2>Be a Hero, Donate Blood</h2>
                         <p>
                             A few minutes of your time could mean a lifetime for someone else.
                             Join our community and make a difference today!
                         </p>
-                        <button className="cta-button">Be as a Donor</button>
+                        <button className={styles.ctaButton}>Be as a Donor</button>
                     </section>
-
                 </div>
+
                 <div className="col">
-                    <form onSubmit={handleSubmit} className="form-container">
+                    <form onSubmit={handleSubmit} className={styles.formContainer}>
                         <h3 className="text-danger">Register as a Donor</h3>
+
                         <label>First Name</label>
                         <input type="text" name="firstName" value={donor.firstName} placeholder="Enter Your First Name" onChange={handleChange} required />
+
                         <label>Last Name</label>
                         <input type="text" name="lastName" value={donor.lastName} placeholder="Enter Your Initial Only" onChange={handleChange} required />
+
                         <label>Phone</label>
                         <input type="text" name="phone" value={donor.phone} placeholder="10-digits only" onChange={handleChange} required />
+
                         <label>Area</label>
                         <input type="text" name="area" value={donor.area} placeholder="Enter Your Area" onChange={handleChange} required />
+
                         <select name="gender" value={donor.gender} onChange={handleChange} required>
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
                         </select>
+
                         <select name="bloodType" value={donor.bloodType} onChange={handleChange} required>
                             <option value="">Select Blood Type</option>
                             <option value="A+">A+</option>
@@ -88,7 +95,8 @@ const AddDonorForm = () => {
                             <option value="AB+">AB+</option>
                             <option value="AB-">AB-</option>
                         </select>
-                        <button type="submit">Donate Now</button>
+
+                        <button type="submit" className={styles.submitBtn}>Donate Now</button>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,5 @@
-
-
 /* Main Container */
-.about-container {
+.aboutContainer {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
@@ -11,20 +9,20 @@
 }
 
 /* Grid Layout */
-.row {
+.rowWrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
 /* Column Styling */
-.col {
+.column {
     flex: 1;
     min-width: 300px;
 }
 
 /* About Section */
-.about-section {
+.aboutSection {
     background: #f9f9f9;
     padding: 20px;
     border-left: 5px solid #007bff;
@@ -33,44 +31,39 @@
     margin-bottom: 20px;
 }
 
-.about-section h2 {
+.aboutSection h2 {
     font-size: 24px;
     color: #007bff;
     margin-bottom: 15px;
 }
 
-.about-section p {
+.aboutSection p {
     font-size: 18px;
     color: #555; 
 }
 
-.about-section ul {
+.aboutSection ul {
     list-style-type: none;
 }
 
-.about-section ul li {
-    font-size: 18px;
+.aboutSection ul li {
+    font-size: 16px;
     margin-bottom: 10px;
-    color: #555; 
-
+    color: #7d6c6c !important; 
 }
 
-/* .about-section ul li strong {
-    font-weight: bold;
-} */
-
 /* Call to Action Section */
-.call-to-action {
+.callToAction {
     text-align: center;
     background: #e3f2fd;
     border-left: 5px solid #0056b3;
 }
 
-.call-to-action .cta-button {
+.ctaButton {
     margin-top: 15px;
     padding: 12px 20px;
     font-size: 18px;
-    background-color: #2e8147;
+    background-color: rgb(50, 134, 169);
     color: white;
     border: none;
     border-radius: 5px;
@@ -78,12 +71,12 @@
     transition: 0.3s;
 }
 
-.call-to-action .cta-button:hover {
-    background-color: #257a2d;
+.ctaButton:hover {
+    background-color: rgb(135, 154, 163);
 }
 
 /* Form Styling */
-.form-container {
+.formContainer {
     background: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
@@ -93,15 +86,15 @@
     margin: 0 auto;
 }
 
-.form-container h3 {
+.formContainer h3 {
     font-size: 24px;
     color: #333;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.form-container input,
-.form-container select {
+.formContainer input,
+.formContainer select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -110,16 +103,16 @@
     font-size: 16px;
 }
 
-.form-container input:focus,
-.form-container select:focus {
+.formContainer input:focus,
+.formContainer select:focus {
     border-color: #007bff;
     outline: none;
 }
 
-.form-container button {
+.formContainer button {
     width: 100%;
     padding: 10px;
-    background-color: #2e8147;
+    background-color: rgb(50, 134, 169);
     color: #fff;
     font-size: 16px;
     border: none;
@@ -128,27 +121,27 @@
     transition: 0.3s;
 }
 
-.form-container button:hover {
-    background-color: #2f9d34;
+.formContainer button:hover {
+    background-color: #8e9ea4;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .row {
+    .rowWrapper {
         flex-direction: column;
     }
 
-    .form-container {
+    .formContainer {
         max-width: 100%;
     }
 
-    .about-section h2 {
+    .aboutSection h2 {
         font-size: 20px;
     }
 
-    .about-section p,
-    .about-section ul li,
-    .call-to-action p {
+    .aboutSection p,
+    .aboutSection ul li,
+    .callToAction p {
         font-size: 16px;
     }
 }

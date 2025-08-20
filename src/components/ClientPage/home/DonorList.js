@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useCart } from "../../../context/CartContext";
-import "../../../styles/DonorList.css";
+import styles from "../../../styles/DonorList.module.css";
 import img from "../../../assets/Brand.jpeg";
 import Filter from "./Filter";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -19,59 +19,51 @@ const DonorList = () => {
       ? donors
       : donors.filter((donor) => donor.bloodType === selectedType);
 
-  // Show loader if donors are not loaded yet
+  // Loader when donors are not ready
   if (!Array.isArray(donors) || donors.length === 0) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+      <Box sx={{ display: "flex", justifyContent: "center", padding: "40px" }}>
         <CircularProgress />
       </Box>
     );
   }
 
   return (
-    <div className="donor-list-container">
+    <div className={styles.donorListContainer}>
       {/* Filter Component */}
       <Filter selectedType={selectedType} onFilterChange={handleFilterChange} />
 
       {/* Donor Cards */}
-      <div className="donor-cards-wrapper">
+      <div className={styles.donorCardsWrapper}>
         {filteredDonors.map((donor) => {
           const isInCart = cart.some((c) => c._id === donor._id);
 
           return (
-            <div key={donor._id} className="donor-card">
+            <div key={donor._id} className={styles.donorCard}>
               <img
                 src={donor.image || img}
-                className="donor-img"
+                className={styles.donorImg}
                 alt={`${donor.firstName} ${donor.lastName}`}
               />
 
-              <div className="card-body">
-                <h5 className="card-title">
+              <div className={styles.cardBody}>
+                <h5 className={styles.cardTitle}>
                   {donor.firstName} {donor.lastName}
                 </h5>
-                <p className="card-text">
+                <p className={styles.cardText}>
                   <strong>Area:</strong> {donor.area}
                 </p>
-                <p className="card-text">
+                <p className={styles.cardText}>
                   <strong>Phone:</strong> {donor.phone}
                 </p>
-                <p className="card-text">
+                <p className={styles.cardText}>
                   <strong>Blood Type:</strong> {donor.bloodType}
                 </p>
 
-                <span
-                  className={`donor-status ${
-                    donor.status === "Available" ? "bg-success" : "bg-danger"
-                  }`}
-                >
-                  {donor.status}
-                </span>
-
-                <div className="d-flex justify-content-center mt-3 gap-2 flex-wrap">
+                <div className={styles.buttonGroup}>
                   <a
                     href={`tel:+91${donor?.phone}`}
-                    className="btnphone"
+                    className={styles.btnPhone}
                     aria-label={`Call ${donor.firstName}`}
                   >
                     <i className="bi bi-telephone-forward"></i>
@@ -79,14 +71,14 @@ const DonorList = () => {
 
                   {isInCart ? (
                     <button
-                      className="btnremove"
+                      className={styles.btnRemove}
                       onClick={() => removeCart(donor._id)}
                     >
                       Remove -
                     </button>
                   ) : (
                     <button
-                      className="btnsave"
+                      className={styles.btnSave}
                       onClick={() => addCart(donor)}
                     >
                       Save +

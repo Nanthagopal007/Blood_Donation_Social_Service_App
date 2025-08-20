@@ -2,7 +2,7 @@
 const FooterPage = () => {
   
   return (
-    <div style={{backgroundColor:"rgb(64, 141, 128)"}}  className=' container-fluid  p-2'>
+    <div style={{backgroundColor:"rgb(50, 134, 169)"}}  className=' container-fluid  p-2'>
       <div className='row'>
         <div className='col'>
         </div>
